@@ -11,15 +11,16 @@ stages:
 jobs:
   include:
     - stage: test
-      script: python -m unittest discover
+      script: python -m unittest discover  # Run unit tests
     - stage: deploy
-      script: ./deploy.sh  # Your deployment script
-      if: branch = main
+      script: ./deploy.sh  # Your deploy script (if necessary)
+      if: branch = main  # Deploy only if commit is on the 'main' branch
+
 deploy:
   provider: heroku
   api_key:
-    secure: <encrypted-api-key>
-  app: <your-heroku-app-name>
+    secure: <encrypted-api-key>  # This is the encrypted Heroku API key
+  app: <your-heroku-app-name>  # Replace with your Heroku app name
   on:
-    branch: main  # Deploy only if the commit is on the 'main' branch
+    branch: main  # Deploy only when changes are pushed to 'main' branch
 
