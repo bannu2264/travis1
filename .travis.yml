@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - "3.8"
+  - "3.9"
+
+stages:
+  - test
+  - deploy
+
+jobs:
+  include:
+    - stage: test
+      script: python -m unittest discover
+    - stage: deploy
+      script: ./deploy.sh  # Your deployment script
+      if: branch = main
